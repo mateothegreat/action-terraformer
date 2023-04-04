@@ -16,7 +16,7 @@ async function run(): Promise<void> {
             const inityaml = YAML.parse(core.getInput('init'));
             for (let k in inityaml) {
                 for (let kk in inityaml[ k ]) {
-                    initVars.push(`-${ k }="${ kk }=${ inityaml[ k ][ kk ] }"`);
+                    initVars.push(`-${ k }=${ kk }=${ inityaml[ k ][ kk ] }`);
                 }
 
             }
