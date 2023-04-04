@@ -2,84 +2,12 @@ name: "Your name here"
 description: "Provide a description here"
 author: "Your name or organization here"
 inputs:
-  ref:
-    required: true
+  init:
+    required: false
     description: "git branch or tag"
-  kubernetes_endpoint:
-    required: true
+  apply:
+    required: false
     description: "https url to api controller"
-  kubernetes_token:
-    required: true
-    description: "access token"
-  kubernetes_image:
-    required: true
-    description: "docker image"
-  kubernetes_environment_variables:
-    required: true
-    description: "array of key value pairs"
-  terraform_backend_credentials:
-    required: true
-    description: "credentials file"
-  terraform_backend_bucket:
-    required: true
-    description: "terraform backend bucket name"
-  terraform_backend_prefix:
-    required: true
-    description: "terraform backend prefix"
-
-  npmrc:
-    required: false
-    description: "content to add to .npmrc"
-  npm_pre:
-    required: false
-    description: "npm first line"
-  npm_token:
-    required: false
-    description: "npm token"
-  npm_registry:
-    required: false
-    description: "npm registry"
-
-  storage_account_key:
-    required: false
-    description: ""
-
-  service_account_name:
-    required: false
-    description: ""
-
-  service_account_key:
-    required: false
-    description: ""
-
-  docker_login_uri:
-    required: true
-    description: "i.e.: grc.io"
-  docker_image_base:
-    required: false
-    description: ""
-
-  docker_build_args:
-    required: false`
-    description: "list of build args to pass to docker build"
-
-  terraform_deploy_file:
-    required: false
-    description: "terraform file to deply"
-  terraform_version:
-    required: false
-    description: "terraform version"
-  terraform_retries:
-    required: false
-    description: ""
-  terraform_workspace:
-    required: false
-    description: ""
-
-  env:
-    required: false
-    description: "environment variables to pass to terraform apply tf file"
-
 runs:
-  using: "node12"
+  using: "node16"
   main: "dist/index.js"
