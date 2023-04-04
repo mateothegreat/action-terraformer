@@ -5,7 +5,7 @@ import * as YAML from 'yamljs';
 
 async function run(): Promise<void> {
     try {
-        const version = core.getInput('terraform_version').toString() || '1.4.4';
+        const version = core.getInput('terraform_version').length > 0 ? core.getInput('terraform_version') || '1.4.4';
 
         await toolCache.extractZip(await toolCache.downloadTool(`https://releases.hashicorp.com/terraform/${ version }/terraform_${ version }_linux_amd64.zip`), '/tmp');
 
