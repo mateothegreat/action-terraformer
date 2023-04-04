@@ -1,0 +1,70 @@
+name: 'build-test'
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+
+    branches:
+      - main
+      - 'releases/*'
+    tags:
+      - 'v*'
+jobs:
+  #  push_to_registry:
+  #    name: Push Docker image to GitHub Packages
+  #    runs-on: ubuntu-latest
+  #    permissions:
+  #      packages: write
+  #      contents: read
+  #    steps:
+  #      - name: Check out the repo
+  #        uses: actions/checkout@v2
+  #
+  #      - name: Docker meta
+  #        id: meta
+  #        uses: docker/metadata-action@v3
+  #        with:
+  #          # list of Docker images to use as base name for tags
+  #          images: |
+  #            docker.pkg.github.com/streamingplatform/action-deploy/action-deploy
+  #          # generate Docker tags based on the following events/attributes
+  #          tags: |
+  #            type=schedule
+  #            type=ref,event=branch
+  #            type=ref,event=pr
+  #            type=semver,pattern={{version}}
+  #            type=semver,pattern={{major}}.{{minor}}
+  #            type=semver,pattern={{major}}
+  #            type=sha
+  #
+  #      - name: Log in to GitHub Docker Registry
+  #        uses: docker/login-action@v1
+  #        with:
+  #          registry: docker.pkg.github.com
+  #          username: ${{ github.actor }}
+  #          password: ${{ secrets.GITHUB_TOKEN }}
+  #
+  #      - name: Build and push
+  #        uses: docker/build-push-action@v2
+  #        with:
+  #          context: .
+  #          push: ${{ github.event_name != 'pull_request' }}
+  #          tags: ${{ steps.meta.outputs.tags }}
+  #          labels: ${{ steps.meta.outputs.labels }}
+  build: # make sure build/ci work properly
+    #    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: |
+          npm install
+      - run: |
+          npm run build
+#  test: # make sure the action works on a clean machine without building
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - uses: ./
+#        with:
+#          name: a
+#          kubernetes_endpoint: b
+#          kubernetes_token: c
