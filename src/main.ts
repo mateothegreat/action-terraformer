@@ -13,8 +13,16 @@ async function run(): Promise<void> {
         let applyVars: string[] = [];
 
         if (core.getInput('init')) {
-            initVars = YAML.parse(core.getInput('init'));
+            const inityaml = YAML.parse(core.getInput('init'));
+            for (let k in inityaml) {
+                for (let kk in inityaml[ k ]) {
+                    initVars.push(`-${ k }="${ kk }=${ inityaml[ k ][ kk ] }`);
+                }
+
+            }
         }
+
+        core.debug(JSON.stringify(initVars));
 
         await exec.exec('/tmp/terraform', [ 'init', ...initVars ]);
 

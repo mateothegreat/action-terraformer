@@ -48,8 +48,14 @@ function run() {
             let initVars = [];
             let applyVars = [];
             if (core.getInput('init')) {
-                initVars = YAML.parse(core.getInput('init'));
+                const inityaml = YAML.parse(core.getInput('init'));
+                for (let k in inityaml) {
+                    for (let kk in inityaml[k]) {
+                        initVars.push(`-${k}="${kk}=${inityaml[k][kk]}`);
+                    }
+                }
             }
+            core.debug(JSON.stringify(initVars));
             yield exec.exec('/tmp/terraform', ['init', ...initVars]);
             if (core.getInput('apply')) {
                 const apply = YAML.parse(core.getInput('apply'));
