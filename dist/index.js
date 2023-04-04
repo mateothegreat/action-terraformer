@@ -60,7 +60,7 @@ function run() {
             if (core.getInput('apply')) {
                 const apply = YAML.parse(core.getInput('apply'));
                 for (let k in apply) {
-                    applyVars.push(`-var=${JSON.stringify(apply[k])}`);
+                    applyVars.push(`-var=${k}=${JSON.stringify(apply[k])}`);
                 }
             }
             core.debug(JSON.stringify(applyVars));
