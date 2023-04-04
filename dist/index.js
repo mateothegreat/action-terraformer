@@ -65,11 +65,12 @@ function run() {
             }
             core.debug(JSON.stringify(applyVars));
             try {
-                yield exec.exec('/tmp/terraform', [
+                const a = yield exec.exec('/tmp/terraform', [
                     'apply',
                     '-auto-approve',
                     ...applyVars
                 ]);
+                core.debug(a.toString());
             }
             catch (e) {
                 core.setFailed(e);

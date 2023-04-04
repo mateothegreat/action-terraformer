@@ -36,13 +36,15 @@ async function run(): Promise<void> {
         core.debug(JSON.stringify(applyVars));
 
         try {
-            await exec.exec('/tmp/terraform',
+            const a = await exec.exec('/tmp/terraform',
                 [
                     'apply',
                     '-auto-approve',
                     ...applyVars
                 ]
             );
+            core.debug(a.toString());
+
         } catch (e) {
             core.setFailed(e);
         }
