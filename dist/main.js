@@ -35,8 +35,7 @@ const YAML = __importStar(require("yamljs"));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            // const version = core.getInput('terraform_version').length > 0 ? core.getInput('terraform_version') : '1.4.4';
-            const version = '1.4.4';
+            const version = core.getInput('terraform_version').length > 0 ? core.getInput('terraform_version') : '1.4.4';
             yield toolCache.extractZip(yield toolCache.downloadTool(`https://releases.hashicorp.com/terraform/${version}/terraform_${version}_linux_amd64.zip`), '/tmp');
             let initVars = [];
             let applyVars = [];

@@ -43,7 +43,8 @@ const YAML = __importStar(__webpack_require__(934));
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield toolCache.extractZip(yield toolCache.downloadTool(`https://releases.hashicorp.com/terraform/${core.getInput('terraform_version')}/terraform_${core.getInput('terraform_version')}_linux_amd64.zip`), '/tmp');
+            const version = core.getInput('terraform_version').length > 0 ? core.getInput('terraform_version') : '1.4.4';
+            yield toolCache.extractZip(yield toolCache.downloadTool(`https://releases.hashicorp.com/terraform/${version}/terraform_${version}_linux_amd64.zip`), '/tmp');
             let initVars = [];
             let applyVars = [];
             if (core.getInput('init')) {
